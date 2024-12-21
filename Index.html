@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIFCF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            width: 100%;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header img {
+            width: 100px;
+            height: auto;
+        }
+
+        header h1 {
+            font-size: 2em;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 10px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            width: 90%;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .column button {
+            padding: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .column button:hover {
+            background-color: #0056b3;
+        }
+
+        .video-container {
+            background-color: black;  //#fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        video {
+            display: block;
+            width: 640px;
+            height: 360px;
+            background-color: black;  //#fff;   // Fondo del Video #fff = Blanco
+        }
+
+        .form-container {
+            margin-top: 20px;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input, .form-container select {
+            padding: 5px;
+            margin: 5px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .form-container button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logotipo">
+        <h1>Licenciatura en Derecho</h1>
+    </header>
+
+    <div class="container">
+        <!-- Columna izquierda -->
+        <div class="column">
+            <button onclick="playVideo('CostosLD.mp4')">Botón 1</button>
+            <button onclick="playVideo('HorariosLD.mp4')">Botón 2</button>
+            <button onclick="playVideo('video3.mp4')">Botón 3</button>
+            <button onclick="playVideo('video4.mp4')">Botón 4</button>
+            <button onclick="playVideo('video5.mp4')">Botón 5</button>
+            <button onclick="playVideo('video6.mp4')">Botón 6</button>
+        </div>
+
+        <!-- Reproductor de video -->
+        <div class="video-container">
+            <video id="mainVideo" autoplay muted controls>
+                <source src="Somos1.mp4" type="video/mp4">
+                Tu navegador no soporta el reproductor de video.
+            </video>
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="column">
+            <button onclick="playVideo('Somos2.mp4')">Botón 7</button>
+            <button onclick="playVideo('Somos3.mp4')">Botón 8</button>
+            <button onclick="playVideo('video9.mp4')">Botón 9</button>
+            <button onclick="playVideo('video10.mp4')">Botón 10</button>
+            <button onclick="playVideo('video11.mp4')">Botón 11</button>
+            <button onclick="playVideo('video12.mp4')">Botón 12</button>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="form-container">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" placeholder="Ingresa tu nombre">
+        <label for="email">Correo:</label>
+        <input type="email" id="email" placeholder="Ingresa tu correo">
+        <label for="phone">Teléfono:</label>
+        <input type="tel" id="phone" placeholder="Ingresa tu teléfono">
+        <label for="interest">Interesado:</label>
+        <select id="interest">
+            <option value="hola">Hola</option>
+            <option value="adios">Adiós</option>
+        </select>
+        <button>Registrar</button>
+    </div>
+
+    <script>
+        let timeout;
+        const mainVideo = document.getElementById("mainVideo");
+
+        // Iniciar o reiniciar el temporizador
+        function startTimer() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                if (mainVideo.paused || mainVideo.ended) {
+                    playVideo("Hola1.mp4"); // Video predeterminado
+                }
+                //playVideo("Hola1.mp4"); // Video predeterminado si no hay interacción
+            }, 15000); // 10 segundos
+        }
+
+        // Reproducir un video específico
+        function playVideo(videoSrc) {
+            clearTimeout(timeout); // Detiene el temporizador actual
+            mainVideo.src = videoSrc;
+            mainVideo.play();
+            startTimer(); // Reinicia el temporizador
+        }
+
+        // Iniciar el temporizador al cargar la página
+        window.onload = startTimer;
+    </script>
+</body>
+</html>

@@ -144,7 +144,7 @@
 
         <!-- Columna derecha -->
         <div class="column">
-            <button onclick="playVideo('Somos2.mp4')">Descarga Ficha</button>
+            <button onclick="downloadFile('Ficha.pdf')">Descarga Ficha</button>
         </div>
     </div>
 
@@ -179,6 +179,14 @@
             }, 15000); // 10 segundos
         }
 
+        function downloadFile(fileName) {
+            const link = document.createElement('a');
+            link.href = fileName;
+            link.download = fileName;
+            link.target = '_self';
+            link.click();
+        }
+        
         // Reproducir un video específico
         function playVideo(videoSrc) {
             clearTimeout(timeout); // Detiene el temporizador actual

@@ -35,6 +35,20 @@
             text-decoration: underline;
         }
 
+        .mic-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #ffc107;
+            color: black;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .mic-button:hover {
+            background-color: #e0a800;
+        }
         .container {
             width: 90%;
             max-width: 600px;
@@ -105,8 +119,7 @@
             background-color: #f9f9f9;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
-    </style>
+     </style>
     <script>
         function playVideo(videoSrc) {
             const videoPlayer = document.getElementById('video-player');
@@ -127,19 +140,60 @@
             videoPlayer.src = 'Somos1.mp4';
             videoPlayer.play();
         };
+
+        function startMic() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'es-ES';
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript.toLowerCase();
+
+                if (transcript.includes('quienes somos')) {
+                    document.querySelector('.column:nth-child(1) button:nth-child(1)').click();
+                } else if (transcript.includes('escuela')) {
+                    document.querySelector('.column:nth-child(1) button:nth-child(1)').click();
+                } else if (transcript.includes('justificación')) {
+                    document.querySelector('.column:nth-child(1) button:nth-child(2)').click();
+                } else if (transcript.includes('habilidades')) {
+                    document.querySelector('.column:nth-child(2) button:nth-child(1)').click();
+                } else if (transcript.includes('campo')) {
+                    document.querySelector('.column:nth-child(2) button:nth-child(2)').click();
+                } else if (transcript.includes('horarios')) {
+                    document.querySelector('.column:nth-child(3) button:nth-child(1)').click();
+                } else if (transcript.includes('costos')) {
+                    document.querySelector('.column:nth-child(3) button:nth-child(2)').click();
+                } else if (transcript.includes('titulación')) {
+                    document.querySelector('.column:nth-child(4) button:nth-child(1)').click();
+                } else {
+                    const synth = window.speechSynthesis;
+                    const utterThis = new SpeechSynthesisUtterance('Me Repites de favor?');
+                    synth.speak(utterThis);
+                }
+            };
+
+            recognition.onerror = function() {
+                const synth = window.speechSynthesis;
+                const utterThis = new SpeechSynthesisUtterance('Hubo un error al intentar escuchar');
+                synth.speak(utterThis);
+            };
+
+            recognition.start();
+        }
     </script>
 </head>
 <body>
     <div class="header">
-        <img src="Logo.png" alt="Logotipo">
+        <img src="logo.png" alt="Logotipo">
     </div>
 
     <h1 class="title">Licenciatura en Derecho</h1>
 
+    <button class="mic-button" onclick="startMic()">Escuchar</button>
+
     <div class="container">
         <div class="button-group">
             <div class="column">
-                <button onclick="playVideo('Somos1.mp4')">Quienes Somos</button>
+                <button onclick="playVideo('Somos1.mp4')">AIFCF</button>
                 <button onclick="playVideo('JustifLD.mp4')">Justificación</button>
             </div>
             <div class="column">
@@ -167,10 +221,11 @@
     </div>
 
     <div class="contact-info">
-        <h2>Contacto</h2>
-        <p>Email: contacto@ejemplo.com</p>
-        <p>Teléfono: +52 123 456 7890</p>
-        <p>Dirección: Calle XXX 123, Ciudad, País</p>
+        <h2>Contáctame en:</h2>
+        <p>Email: Contacto@AIFCF.com.mx</p>
+        <p>whatsapp: XXXX XXXX XXXX</p>
+        <p>Teléfono: +52 111 111 1111</p>
+        <p>Dirección: Calle XXX ###, Ciudad MX, País...</p>
     </div>
 
 </body>
